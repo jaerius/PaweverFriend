@@ -10,12 +10,12 @@ export default function Footer(){
 
                     <Link href="/">
                         <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                            <span className="ml-3 text-xl">인천블록체인 칼리지 ip-sheild</span>
+                            <span className="ml-3 text-xl">Pawever Friend</span>
                         </a>
                     </Link>
 
-                    <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">© 2023 ip-sheild —
-                        <a href="#" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">@ip-sheild</a>
+                    <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">© 2023 Pawever Friend —
+                        <a href="#" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">@pawever friend</a>
                     </p>
                     <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
                         <a className="text-gray-500">

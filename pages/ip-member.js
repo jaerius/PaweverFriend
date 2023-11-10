@@ -11,10 +11,10 @@ export default function Projects({resData}) {
     
     return (
         <Layout >
-            <div className="flex flex-col items-center justify-center min-h-screen px-3 mb-10">
+            <div className="flex flex-col items-center justify-center min-h-screen px-3 mb-10 bg-transparent">
                 <h1 className="text-4xl font-bold sm:text-6xl">
                     전체 사용자 : <span className="pl-4 text-blue-500">{resData.length}</span>              
-                </h1>
+                 </h1>
                 <br/>
                 <br/>
                 <br/>
@@ -22,9 +22,11 @@ export default function Projects({resData}) {
                     사용자등록
                 </button>                      
 
-                <div className="grid grid-cols-1 gap-8 p-12 m-4 md:grid-cols-4">
+                <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {resData.map((list, index) => (
+                        <div className="flex justify-center">
                         <MemberItem data={list} key={index}></MemberItem>
+                        </div>
                     ))}
                 </div>            
             </div>
@@ -34,7 +36,7 @@ export default function Projects({resData}) {
 
 // 각 요청 때마다 호출
 export async function getServerSideProps(context) {
-    const res = await fetch('http://localhost:8080/user')
+    const res = await fetch('http://localhost:8080/user',{ cache: 'no-cache' })
     const resData = await res.json()    
     
     return {

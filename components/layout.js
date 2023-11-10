@@ -6,8 +6,8 @@ export default function Layout({ children }) {
     return (
         <div className="bg-primary">   
             <Head>
-                <title>IP-SHEILD</title>
-                <meta name="description" content="방어형 지식재산권" />
+                <title>Pawever Friend</title>
+                <meta name="description" content="반려견 입양 플랫폼" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>            
             <Header/>              
