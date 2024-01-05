@@ -2,7 +2,9 @@ import Layout from '../components/layout';
 import Link from 'next/link';
 import Image from 'next/image'
 import { useWallet } from './walletContext';
-
+import LoginComponent from './login';
+import { AuthProvider } from '../components/auth';
+import { BrowserRouter } from 'react-router-dom';
 import React, {useState, useEffect, useCallback} from 'react';
 import { ethers } from "ethers";
 
@@ -98,7 +100,8 @@ export default function Home() {
 
 
   return (
-    <Layout>
+   
+  <Layout>
         <div className="flex items-center justify-center bg-gradient-to-t via-[#c8ebfd] to-[#e7e9fe] h-screen p-6">
             <section className="flex min-h-screen flex-col items-center justify-center text-gray-600 body-font">
                 <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
@@ -126,7 +129,9 @@ export default function Home() {
                   </div>
                 </div>
             </section>
-        </div>
+        </div>    
     </Layout>
+    
+    
   );
 }

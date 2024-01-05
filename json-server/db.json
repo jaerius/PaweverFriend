@@ -1,6 +1,5 @@
 {
   "user": [
-
     {
       "email": "test1@test.com",
       "name": "Jaewon Kim",
@@ -15,7 +14,21 @@
       "deposit": "10만원",
       "period": "1년",
       "id": 7
+    },
+    {
+      "email": "rylynn1029@naver.com",
+      "name": "Jaewon Kim",
+      "birth": "",
+      "hp": "",
+      "address": "경인남길 30번길",
+      "image_src": "https://gateway.pinata.cloud/ipfs/bafybeigzqcdhgie3py2v6avt523jhnhztf5au3eqza33rskoqw335enodi",
+      "dog_name": "개새끼",
+      "breed": "큰 개",
+      "age": "12",
+      "sex": "male",
+      "deposit": "10만원",
+      "period": "",
+      "id": 8
     }
-    
   ]
 }

@@ -21,7 +21,8 @@ export default function Projects({resData}) {
                 <button className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded" onClick={regSbt}>
                     사용자등록
                 </button>                      
-
+                <br/>
+                
                 <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {resData.map((list, index) => (
                         <div className="flex justify-center">
