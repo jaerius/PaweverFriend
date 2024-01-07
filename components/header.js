@@ -10,6 +10,8 @@ export default function Header(){
     console.log(user)
 
     const handleLogout = (event) => {
+
+
         event.preventDefault();
         logout();
     };
@@ -37,9 +39,13 @@ export default function Header(){
                         </Link>                                               
                         <Link href="/ip-member">
                             <a className="mr-5 hover:text-gray-900">사용자</a>
+                        </Link>	
+                        <Link href="/mypage">
+                            <a className="mr-5 hover:text-gray-900">마이페이지</a>
                         </Link>						
                         {user ? (
                 // 로그인 상태일 때: 로그아웃 버튼을 표시
+                            
                             <button 
                                  onClick={handleLogout} 
                                  style={{ textDecoration: 'underline', fontWeight: 'bold' }}

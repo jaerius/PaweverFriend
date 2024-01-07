@@ -16,6 +16,10 @@ const LoginComponent = () => {
         if (user) {
             // 로그인 성공 시
             const userData = { name: user.name, isLoggedIn: true };
+
+            // 사용자 ID를 쿠키에 설정
+            document.cookie = `userId=${user.id}; max-age=${30 * 24 * 60 * 60}; path=/`;
+
             login(userData);
             console.log(login)
             console.log(userData.isLoggedIn)

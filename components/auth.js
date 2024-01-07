@@ -20,7 +20,11 @@ export const AuthProvider = ({ children }) => {
     console.log(user)
 
     const logout = () => {
+
+        // 쿠키 삭제
+        document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
         setUser(null);
+        
     };
 
     return (
