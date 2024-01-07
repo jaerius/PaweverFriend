@@ -12,13 +12,13 @@ const LoginComponent = () => {
       const response = await fetch('http://localhost:3000/user');
       const users = await response.json();
 
-      const user = users.find(user => user.id === parseInt(id) && user.name === password);
+      const user = users.find(user => user.userId === parseInt(id) && user.name === password);
         if (user) {
             // 로그인 성공 시
-            const userData = { name: user.name, isLoggedIn: true };
+            const userData = { userId: user.userId, name: user.name, isLoggedIn: true };
 
             // 사용자 ID를 쿠키에 설정
-            document.cookie = `userId=${user.id}; max-age=${30 * 24 * 60 * 60}; path=/`;
+            document.cookie = `user=${JSON.stringify(userData)}; max-age=${30 * 24 * 60 * 60}; path=/`;
 
             login(userData);
             console.log(login)
@@ -38,7 +38,7 @@ const LoginComponent = () => {
      
   <div class="flex justify-center items-center h-screen" 
        style={{ 
-        backgroundImage: "url('http://image.dongascience.com/Photo/2019/11/10ed7359329fe87a2dc84921babb17e0.jpg')",
+        backgroundImage: "url('https://cdn.greenfieldpuppies.com/wp-content/uploads/2018/05/large-group-of-dogs-running-in-a-field-800x800.jpg')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat' }}>

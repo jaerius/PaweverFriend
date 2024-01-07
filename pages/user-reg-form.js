@@ -13,13 +13,27 @@ import {ethers} from "ethers";
 export default function UserRegForm() {
 	const {account, connectWallet} = useWallet('');
 
-	/*let ethersProvider;
+/*	let ethersProvider;
     if (account) {
    	    ethersProvider = new ethers.BrowserProvider(window.ethereum); //ethers.BrowserProvider in v6
-    }*/
+    } */
+	const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    };
+
+	useEffect(() => {
+        // 쿠키에서 userId 읽어와 상태에 설정
+        const userCookie = getCookie('user');
+        if (userCookie) {
+            const userData = JSON.parse(userCookie);
+            setUserId(userData.userId);
+        }
+    }, []);
 
 	const router = useRouter()
-    
+		const [userId, setUserId] = useState('');
 		const [sex, setSex] = useState('');
 	    const [image, setImage] = useState('')
 		const [url, setUrl] =useState('')
@@ -60,7 +74,7 @@ export default function UserRegForm() {
 			
 		}
 		
-        
+  /*      
   // 1. 반려동물 입양 등록 함수
   const enrollPet = async (name, CID, balance, duration) => {
 
@@ -73,33 +87,33 @@ export default function UserRegForm() {
 
     // enroll 트랜잭션
     await enroll.wait();
-
-	
+	console.log(userId);
   };
-		
+	*/	
 
   return (
     <Layout >
 		<section className="bg-white dark:bg-gray-900">
 		  <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-			  <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">사용자 및 강아지 등록하기</h2>
+			  <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">강아지 등록하기</h2>
 			  <form id="sbtForm" onSubmit={ async (e) => {
 				e.preventDefault()
 	
 				const frmData ={
-					"email": e.target.email.value,
-					"name": e.target.name.value,
-					"birth": e.target.birth.value,
-					"hp": e.target.hp.value,
-					"address": e.target.address.value,
 					"image_src": url,
 					"dog_name": e.target.dog_name.value,
 					"breed": e.target.breed.value,
 					"age": e.target.age.value,
 					"sex": e.target.sex.value,
 					"deposit": e.target.deposit.value,
-					"period": e.target.period.value
+					"period": e.target.period.value,
+					"userId": userId, 
+					"senderId": userId,
+					"receiverId": null,
 				}
+
+	
+
 
 				const options = {
 					method: "POST",
@@ -108,8 +122,9 @@ export default function UserRegForm() {
 					},
 					body: JSON.stringify(frmData)
 				}
+				await fetch('/user')
 
-				await fetch('/user' ,options)
+				await fetch('/dog' ,options)
 				.then(function(response) {
 					return response.json()
 				})
@@ -123,40 +138,18 @@ export default function UserRegForm() {
 					  
 			}} >
 				
-				  <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-					  <div className="sm:col-span-2">
-						  <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
-						  <input type="text" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="이메일 정보를 입력해주세요" required="" />
-					  </div>
-					  <div className="w-full">
-						  <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">name</label>
-						  <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="이름 정보를 입력해주세요" required="" />
-					  </div>
-					  <div className="w-full">
-						  <label htmlFor="birth" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">birth</label>
-						  <input type="text" name="birth" id="birth" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="생년월일 정보를 입력해주세요" required="" />
-					  </div>					  
-					  <div>
-						  <label htmlFor="hp" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">hp</label>
-						  <input type="text" name="hp" id="hp" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="전화번호 정보를 입력해주세요" required="" />
-					  </div> 
-					  
-					  <div className="w-full">
-						  <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">address</label>
-						  <input type="text" name="address" id="address" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="주소정보를 입력해주세요" required="" />
-					  </div>					  
+				  <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">			  
 					  <div>
 					  <label htmlFor="url" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">강아지 사진</label>
-            <input
-                type="file"
-                name= "url"
-                id= "url"
-                onChange={upload}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="img"
-                required=""
-            />
-					  			  
+						<input
+							type="file"
+							name= "url"
+							id= "url"
+							onChange={upload}
+							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+							placeholder="img"
+							required=""
+						/>		  
 					  </div> 
 					  <div className="w-full">
 						  <label htmlFor="dog_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">강아지 이름</label>
@@ -187,8 +180,8 @@ export default function UserRegForm() {
 						  <input type="text" name="period" id="period" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="기간을 입력해주세요" required="" />
 					  </div>
 				  </div>
-				  <button type="submit" className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800" onClick={(e)=>enrollPet(e.target.name.value, cid, e.target.deposit.value, e.target.period.value)}>
-					  사용자등록
+				  <button type="submit" className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+					  입양 등록
 				  </button>
 			  </form>
 		  </div>

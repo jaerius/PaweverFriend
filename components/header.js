@@ -2,18 +2,19 @@ import Link from 'next/link';
 import DarkModeToggleButton from './elements/dark-mode-toggle-button';
 import { AuthProvider, useAuth } from '../components/auth';
 import React from 'react';
+import {useRouter} from 'next/router'
 
 export default function Header(){
 
+    const router = useRouter();
     const { user, logout } = useAuth();
 
     console.log(user)
 
     const handleLogout = (event) => {
-
-
         event.preventDefault();
         logout();
+        router.push("/");
     };
 
     return (
@@ -38,7 +39,7 @@ export default function Header(){
                             <a className="mr-5 hover:text-gray-900">홈</a>
                         </Link>                                               
                         <Link href="/ip-member">
-                            <a className="mr-5 hover:text-gray-900">사용자</a>
+                            <a className="mr-5 hover:text-gray-900">메인페이지</a>
                         </Link>	
                         <Link href="/mypage">
                             <a className="mr-5 hover:text-gray-900">마이페이지</a>

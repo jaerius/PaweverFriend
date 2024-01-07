@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+
 
 const AuthContext = createContext({
     user: null,
@@ -12,6 +13,20 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+
+    const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    };
+
+    useEffect(() => {
+        const userCookie = getCookie('user');
+        if (userCookie) {
+            const userData = JSON.parse(userCookie);
+            setUser(userData);
+        }
+    }, []);
 
     const login = (userData) => {
         setUser(userData);
