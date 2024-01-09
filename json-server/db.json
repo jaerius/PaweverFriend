@@ -101,7 +101,7 @@
       "birth": "",
       "hp": "",
       "address": "",
-      "image_src": "",
+      "image_src": "https://gateway.pinata.cloud/ipfs/bafybeigzqcdhgie3py2v6avt523jhnhztf5au3eqza33rskoqw335enodi",
       "dog_name": "ㅇㄴㅀ",
       "breed": "ㄴㅇ홋",
       "age": "123",
@@ -122,6 +122,7 @@
       "sex": "male",
       "deposit": "ㅈㄱ소",
       "period": "56262",
+      "image_src": "",
       "userId": 1234,
       "senderId": 1234,
       "receiverId": "",
@@ -133,7 +134,7 @@
       "birth": "",
       "hp": "",
       "address": "",
-      "image_src": "",
+      "image_src": "https://gateway.pinata.cloud/ipfs/bafybeigzqcdhgie3py2v6avt523jhnhztf5au3eqza33rskoqw335enodi",
       "dog_name": "ㅏㅓ",
       "breed": "",
       "age": "",
@@ -143,6 +144,12 @@
       "userId": 1234,
       "senderId": 1234,
       "receiverId": null,
+      "comments": [
+        "우리개짱",
+        "ㅇㄶㄱㅈㄴ",
+        "ㄴㅇㅀㄱㅎ",
+        "ㅁㄱㅈ호ㅗ3"
+      ],
       "id": 13
     },
     {

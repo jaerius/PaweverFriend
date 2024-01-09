@@ -21,7 +21,7 @@ export default function MemberItem({data}){
     const age = data.age
     const deposit = data.deposit
     const period = data.period
-
+    const id = data.id
     
     return (
 
@@ -45,12 +45,20 @@ export default function MemberItem({data}){
     <div className="flex justify-center items-center">
             <button
           className="w-32 text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-          onClick={() => router.push('../contract')}
+          onClick={() => router.push({
+            pathname:  `../../dogDetail`,
+            query:{
+              id: id,
+            }
+
+          })}
         >
-          입양하기
+          상세 정보
         </button>
+        
             </div>
             </div></div>
             </div>
     );
 }
+
