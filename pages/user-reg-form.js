@@ -9,14 +9,26 @@ import axios from "axios";
 import { useWallet } from './walletContext';
 import abi from "./api/abi";
 import {ethers} from "ethers";
+// npm i @web3-onboard/core @web3-onboard/injected-wallets @web3-onboard/react
+import { useConnectWallet } from "@web3-onboard/react";
 
 export default function UserRegForm() {
-	const {account, connectWallet} = useWallet('');
 
-/*	let ethersProvider;
-    if (account) {
-   	    ethersProvider = new ethers.BrowserProvider(window.ethereum); //ethers.BrowserProvider in v6
-    } */
+	const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+	
+	let ethersProvider;
+  if (wallet) {
+    ethersProvider = new ethers.providers.Web3Provider(wallet.provider, "any"); //ethers.BrowserProvider in v6
+  }
+	const PawEverFriends_CA = "0x402bb9D05F7cB024C3e2Fe3ABd79dA70C8E034Ac";
+
+	const Paw_Enroll = async (dogNumber,deposit,duration) => {
+		const Paw_contract = new ethers.Contract(PawEverFriends_CA,abi,ethersProvider.getSigner());
+		const Enroll = await Paw_contract.enroll(dogNumber,deposit,duration);
+		Enroll.wait();
+	}
+	
+	
 	const getCookie = (name) => {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -42,7 +54,6 @@ export default function UserRegForm() {
         const handleChange = (event) => {
 			setSex(event.target.value);
 		  };
-
 
 		function getAccessToken () {
 			return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDdmRWVDMmRiNjZkQmE2ODk0QzQ2MWFDMzg0YUY3OEI4OWRCRWVGRjIiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTU3OTM4NTE5MTUsIm5hbWUiOiJpcC1zaGVpbGQifQ.UPG5fSYIewbayQrPWiPIIMUnv71fwQhgzostIFOWHlI'
@@ -98,7 +109,6 @@ export default function UserRegForm() {
 			  <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">강아지 등록하기</h2>
 			  <form id="sbtForm" onSubmit={ async (e) => {
 				e.preventDefault()
-	
 				const frmData ={
 					"image_src": url,
 					"dog_name": e.target.dog_name.value,
@@ -110,10 +120,15 @@ export default function UserRegForm() {
 					"userId": userId, 
 					"senderId": userId,
 					"receiverId": null,
+					"dogId": userId+e.target.age.value,
+					"comments": "",
 				}
 
-	
+				
+				const jsonData = JSON.stringify(frmData);
 
+
+				localStorage.setItem('frmData', jsonData);
 
 				const options = {
 					method: "POST",
@@ -132,10 +147,9 @@ export default function UserRegForm() {
 					console.log(JSON.stringify(myJson))
 					router.push('/ip-member')
 				});
-					
-				
-				
-					  
+				console.log(userId+e.target.age.value)
+				console.log(e.target.deposit.value)
+				Paw_Enroll(userId+e.target.age.value, e.target.deposit.value, e.target.period.value);
 			}} >
 				
 				  <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">			  
@@ -181,7 +195,7 @@ export default function UserRegForm() {
 					  </div>
 				  </div>
 				  <button type="submit" className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-					  입양 등록
+					  등록하기
 				  </button>
 			  </form>
 		  </div>

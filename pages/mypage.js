@@ -81,9 +81,15 @@ export async function getServerSideProps(context) {
         const allDogsData = await res.json();
 
         // 사용자가 로그인한 경우, 해당 ID에 맞는 사용자 정보만 필터링
-        sentDogs = allDogsData.filter(dog => dog.senderId == loggedInUserId);
-        receivedDogs = allDogsData.filter(dog => dog.receiverId == loggedInUserId);    } 
+        const filteredDogs = allDogsData.filter(dog => dog.senderId == loggedInUserId || (dog.receiverId == loggedInUserId && dog.receiverId !== null && dog.senderId));
+        
+        // 중복을 제거하기 위해 dogId를 기준으로 객체를 하나씩만 선택
+        const uniqueDogs = Array.from(new Map(filteredDogs.map(dog => [dog.dogId, dog])).values());
 
+        // 다시 필요한 경우에 따라 나눠서 저장
+        sentDogs = uniqueDogs.filter(dog => dog.senderId == loggedInUserId);
+        receivedDogs = uniqueDogs.filter(dog => dog.receiverId == loggedInUserId);
+    } 
     return {
         props: {
             sentDogs,
