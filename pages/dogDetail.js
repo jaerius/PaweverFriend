@@ -20,6 +20,8 @@ const Dog = ({ dogData, comments, loggedInUserId }) => {
   const senderId = dogData.senderId
   const image_src = dogData.image_src
   
+  
+  
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
 
 	//지갑 연결
@@ -55,6 +57,7 @@ const Dog = ({ dogData, comments, loggedInUserId }) => {
         period: period,
         senderId: senderId,
         image_src: image_src,
+        comments: comments,
         
         
       }});

@@ -13,6 +13,7 @@ export default function CommentSection({ dogId }) {
       // 먼저 기존 개 객체를 가져옵니다.
     const response = await axios.get(`http://localhost:8080/dog/${dogId}`);
     const dogData = response.data;
+    console.log(dogData)
 
     const newCommentObject = {
       text: newComment,

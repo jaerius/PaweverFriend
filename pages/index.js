@@ -163,19 +163,19 @@ export default function Home() {
   return (
    
   <Layout>
-        <div className="flex items-center justify-center bg-gradient-to-t via-[#c8ebfd] to-[#e7e9fe] h-screen p-6">
-            <section className="flex min-h-screen flex-col items-center justify-center text-gray-600 body-font">
-                <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-                  <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-                    <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-                        Pawever Friend
-                    </h1>
-                    <p className="mb-8 leading-relaxed">
-                    유기동물 입양 플랫폼
-                    </p>
-                    <div className="flex justify-center">
-                      
-                    <button disabled={connecting} onClick={() => (wallet ? disconnect(wallet) : connect())}>
+      <div className="grid grid-cols-2 gap-4 items-center justify-center">
+        {/* Image Container */}
+        <div className="flex justify-center lg:max-w-lg lg:w-full md:w-2/3 mb-5 ml-40">
+          <Image alt="profile" src="/images/profile/logo.png" width="600" height="600" className="mx-auto mb-10" />
+        </div>
+  
+        {/* Wallet Connection Container */}
+        <div className="text-black text-md">
+          <p className="text-black text-xl">책임 있는 반려 동물 입양 문화를 만들어 갑니다</p> {/* 추가된 p 태그 */}
+          <br/>
+          <br/>
+                    <button className="text-center text-violet-500 text-lg bg-white hover:bg-purple-300 font-bold py-2 px-4 rounded-2xl border border-violet-500"
+            disabled={connecting} onClick={() => (wallet ? disconnect(wallet) : connect())}>
           {connecting ? "연결 중" : wallet ? "연결 해제" : "지갑 연결"}
         </button>
 
@@ -187,13 +187,10 @@ export default function Home() {
                     : <button onClick={connectWalletHandler}>connectWallet </button>} */}
 
                     </div>
-                  </div>
-                  <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-                    <Image alt="profil" src="/images/profile/hand-illustration.png" width="500" height="500" className="mx-auto object-cover "/>
-                  </div>
-                </div>
-            </section>
-        </div>    
+        </div>
+                  
+    
+      
     </Layout>
     
     
