@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+ // eslint: {
+ //   ignoreDuringBuilds: true,
+ // },
   swcMinify: true,
   reactStrictMode: true,
   images: {
@@ -8,9 +11,6 @@ const nextConfig = {
       ],
       format: ['image/png', 'image/webp', 'image/jpeg', 'image/webp'],
       
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   },
   /* POST 전송이 cors 인지 명확하게 확인이 되지 않았으나 통신 오류 발생하여 적용이후 완료 */
   async rewrites() {
